@@ -1,0 +1,12 @@
+.latnews{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 9%;
+    margin-top: 3%;
+    text-decoration: underline;
+}
+.charts{
+    justify-content: space-evenly;
+    display: flex;
+}

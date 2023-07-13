@@ -1,0 +1,76 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+.navbar {
+    font-family: 'Poppins', sans-serif;
+    line-height: 26px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-family: "roboto", "sans-serif";
+    letter-spacing: 3px;
+}
+
+.form-control {
+    width: 100%;
+
+}
+
+.d-flex {
+    width: auto;
+    padding-left: 30%;
+}
+
+.navbar-nav {
+    padding-left: 19%;
+}
+
+.nav-link {
+    font-weight: 300 !important;
+}
+
+.active {
+    border-bottom: 1px solid black;
+} */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+.navbar {
+    font-family: 'Poppins', sans-serif;
+    line-height: 26px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-family: "roboto", "sans-serif";
+    letter-spacing: 3px;
+}
+
+.form-control {
+    width: 100%;
+
+}
+
+.d-flex {
+    width: auto;
+    padding-left: 30%;
+}
+
+.navbar-nav {
+    padding-left: 19%;
+}
+
+.nav-link {
+    font-weight: 300;
+}
+
+.active {
+    border-bottom: 1px solid black;
+}
+#logout{
+    border-bottom: 0px solid white;
+    color: #000000A6
+}
+#logout:hover{
+    color: #000000;
+    border-bottom: 1px solid black;
+}

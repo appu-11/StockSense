@@ -1,0 +1,20 @@
+.hh3{
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 40vw;
+    padding: 0;
+    flex-direction: column;
+    margin: 6% 30%;
+}
+.ma{
+    margin-top: 2%;
+}
+.link-primary{
+    cursor: pointer;
+}
