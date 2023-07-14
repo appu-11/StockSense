@@ -10,23 +10,11 @@ import { Common } from "../common/common.js"
 const Homepage = () => {
     
     const [data, setData] = React.useState(null);
-    const [data2, setData2] = React.useState(null);
-    // useEffect(() => {
-    //     axios.get("http://localhost:8080/api/auth/").then((res) => {
-    //         console.log(res.data.final);
-    //         setData(res.data.final);
-    //     })
-    //     // eslint-disable-next-line
-    // },[])
     useEffect(() => {
         axios.get("http://localhost:8080").then((res) => {
             console.log(res.data.final);
             setData(res.data.final);
         })
-        // axios.get("http://localhost:8080/api/auth/").then((res) => {
-        //     console.log(res.data.final2);
-        //     setData2(res.data.final2);
-        // })
         // eslint-disable-next-line
     },[])
     const randomIndexes = [];
@@ -46,14 +34,14 @@ const Homepage = () => {
                 <Common item = {data2[0]} ind = {0}/>
                 <Common item = {data2[1]} ind = {1}/>
             </section> */}
-            {/* <div className="latnews">Latest News</div>
+            <div className="latnews">Latest News</div>
             <News>
                 <Newscard item = {data[randomIndexes[0]]}/>
                 <Newscard item = {data[randomIndexes[1]]}/>
                 <Newscard item = {data[randomIndexes[2]]}/>
                 <Newscard item = {data[randomIndexes[3]]}/>
 
-            </News> */}
+            </News>
         </Layout>
     )
 }

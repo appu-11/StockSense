@@ -24,11 +24,12 @@ export const profileController = async (req, res) => {
                 mpp.set(t.companysymbol,[t]);
             }
         }
-        console.log(mpp);
+        const mppObject = Object.fromEntries(mpp);
         res.status(201).send({
             success:true,
             message:"Profile data extracted",
             data: fin,
+            data2: mppObject,
         })
     }
     catch(error){
@@ -37,6 +38,25 @@ export const profileController = async (req, res) => {
         res.status(500).send({
             success:false,
             message:"Error in profile controller"
+        })
+    }
+};
+
+export const closevalueController = async (req, res) => {
+    try{
+        const {companySymbols} = req.body;
+        res.status(201).send({
+            success:true,
+            message:"Close value extracted",
+            
+        });
+    }
+    catch(error){
+        console.log(error);
+        console.log("Error in close value controller");
+        res.status(500).send({
+            success:false,
+            message:"Error in close value controller"
         })
     }
 };
