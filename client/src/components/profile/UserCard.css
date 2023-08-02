@@ -1,0 +1,15 @@
+.maths{
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    text-align: justify;
+    justify-content: center;
+}
+.Pie-chart{
+    display: grid;
+    justify-content: center;
+    text-align: center;
+}
+.uparrow{
+    color: rgb(31, 204, 31);
+}

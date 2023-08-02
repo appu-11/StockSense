@@ -8,8 +8,7 @@ import { useAuth } from "../../context/auth.js";
 
 const CompanyName = () =>{
     const navigate = useNavigate();
-    // const user = JSON.parse(localStorage.getItem("auth"));
-    // const username = user["user"]["username"];
+    const user = JSON.parse(localStorage.getItem("auth"));
     const [auth, setAuth] = useAuth();
     const {companysymbol} = useParams();
 
@@ -28,24 +27,25 @@ const CompanyName = () =>{
             setData(res.data);
         }).catch(err => {
             console.log(err);
-            console.log("hn mein error huin");
+            console.log("error in getting company data");
         });
     },[companysymbol]);
 
     useEffect(() => {
         if (selectedDate && numberOfStocks) {
-            const [yearr, monthh, dayy] = selectedDate.split("-");
-            const day = parseInt(dayy);
-            const month = parseInt(monthh);
-            const year = parseInt(yearr);
+            const [year, month, day] = selectedDate.split("-");
             const date = {
-                day,
-                month,
                 year,
+                month,
+                day,
             }
-            const targetIndex = data.data.findIndex(obj => obj.time === selectedDate);
-            console.log(data.data);
-            console.log(date);
+            let targetIndex = -1;
+            for(let i = 0; i < data.data.length; i++){
+                if(data.data[i].time.year === date.year && data.data[i].time.month === date.month && data.data[i].time.day === date.day){
+                    targetIndex = i;
+                    break;
+                }
+            }
             console.log(targetIndex);
             if(targetIndex === -1){
                 setValidDate(false);
@@ -96,9 +96,18 @@ const CompanyName = () =>{
             console.log(error);
             console.log("error in adding stocks");
         }
-        
-        
     };
+
+    const updateWatchlist = async(add) => {
+        try{
+            const res = await axios.post('http://localhost:8080/api/watchlist', {companysymbol, email: user.user.email, add});
+            alert(res.data.message);
+        }
+        catch(error){
+            console.log(error);
+            console.log("error in updating watchlist");
+        }
+    }
 
     return (
         <Layout>
@@ -141,6 +150,11 @@ const CompanyName = () =>{
                                     <button className="btn btn-primary" onClick={() => {setShowModal(false)}}>Cancel</button>
                                     <button className="btn btn-primary" onClick={handleConfirm}>Confirm</button>
                                 </div>
+                            </div>
+                            <div className="watch">
+                                <button className="btn btn-primary" onClick={() => updateWatchlist(true)}>Add to Watchlist</button>
+                                <button className="btn btn-primary" onClick={() => updateWatchlist(false)}>Remove from Watchlist</button>
+
                             </div>
                         </div>
                     </div>

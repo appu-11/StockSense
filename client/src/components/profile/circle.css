@@ -1,0 +1,25 @@
+.circle {
+    transform: rotate(-90deg);
+}
+
+.circle-background {
+    fill: transparent;
+    stroke: lightgray;
+    stroke-width: 10;
+}
+
+.circle-progress {
+    fill: transparent;
+    stroke: #3a86ff;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.percentage {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+}
+  

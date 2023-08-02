@@ -5,19 +5,27 @@ import "./homepage.css";
 import { useEffect } from "react";
 import { News } from "./styles.js"
 import { Newscard } from "../newscard/newscard.js"
-import { Common } from "../common/common.js"
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import Indexgraph from "./IndexGraph.js";
 
 const Homepage = () => {
     
     const [data, setData] = React.useState(null);
+    const [index, setIndex] = React.useState(null);
+    const [activeTab, setActiveTab] = React.useState("NIFTY");
+    
     useEffect(() => {
         axios.get("http://localhost:8080").then((res) => {
             console.log(res.data.final);
             setData(res.data.final);
+            setIndex(res.data.index);
         })
         // eslint-disable-next-line
     },[])
+
     const randomIndexes = [];
+
     if(data){
         while (randomIndexes.length < 4) {
             const randomIndex = Math.floor(Math.random() * data.length);
@@ -26,14 +34,33 @@ const Homepage = () => {
             }
         }
     }
-    if(!data) return null;
+    if(!data || !index) return <span>Loading....</span>;
+
+    // NSEI, BSESN, NDX, SDX, DJI
+    
 
     return (
         <Layout>
-            {/* <section className="charts">
-                <Common item = {data2[0]} ind = {0}/>
-                <Common item = {data2[1]} ind = {1}/>
-            </section> */}
+            <div className="Index">
+                <div className="index-area">
+                <Tabs
+                        activeKey={activeTab} // Set the active tab based on the state
+                        onSelect={(tab) => setActiveTab(tab)} // Update active tab state when a tab is selected
+                        transition={false}
+                        id="noanim-tab-example"
+                    >
+                        <Tab eventKey="NIFTY" title="NIFTY" className="index-graph">
+                            {activeTab === "NIFTY" && <Indexgraph data={index[0]} />}
+                        </Tab>
+                        <Tab eventKey="SENSEX" title="SENSEX" className="index-graph">
+                            {activeTab === "SENSEX" && <Indexgraph data={index[1]} />}
+                        </Tab>
+                        <Tab eventKey="NASDAQ" title="NASDAQ" className="index-graph">
+                            {activeTab === "NASDAQ" && <Indexgraph data={index[2]} />}
+                        </Tab>
+                    </Tabs>
+                </div>
+            </div>
             <div className="latnews">Latest News</div>
             <News>
                 <Newscard item = {data[randomIndexes[0]]}/>

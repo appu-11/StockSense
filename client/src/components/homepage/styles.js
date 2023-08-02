@@ -5,8 +5,8 @@ export const News = styled.section`
     grid-template-columns: repeat(4, 1fr);
     gap: 2%;
     row-gap: 2%;
-    padding: 25px;
-    margin: 5%;
+    margin-left: 9%;
+    margin-right: 9%;
     margin-top: 0%;
     @media (max-width: 700px) {
     grid-template-columns: repeat(3, 1fr);

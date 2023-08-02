@@ -63,9 +63,43 @@ export const homeController = async(req, res) => {
         // }).catch(error => {
         //     console.log(error);
         // });
-        // const nifty = await axios.get(`http://api.marketstack.com/v1/exchnages/BSE?access_key=${process.env.marketstack_api}&limit=5`);
-        // console.log(nifty["data"]);
-        
+        console.log("HERE");
+        const l = ["NSEI", "BSESN", "NDX", "SDX", "DJI"];
+        let index = [];
+        for(let i = 0; i < 3; i++) {
+            try{
+                const url = `https://yahoo-finance15.p.rapidapi.com/api/yahoo/hi/history/^${l[i]}/1d?diffandsplits=false`;
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'X-RapidAPI-Key': `${process.env.yahoo_api}`,
+                        'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com'
+                    }
+                };
+                const response = await fetch(url, options);
+                const result = await response.json();
+                const keys = Object.keys(result.items);
+                let final = [];
+                for(let i = 0; i < keys.length; i++) {
+                    const timestamp = parseInt(keys[i], 10);
+                    const t = new Date(timestamp* 1000);
+                    const re = result.items[keys[i]];
+                    let ff = new Date(re.date);
+                    ff.setDate(ff.getDate() + 1);
+                    // console.log(ff, re.date);
+                    let ss = ff.toISOString().split("T")[0];
+                    if(ss === "2022-10-24" || re.close === 0) continue;
+                    let fin = {
+                        time: ss,
+                        value: re.close,
+                    };
+                    final.push(fin);
+                }
+                index.push(final);
+            } catch (error) {
+                console.error(error);
+            }
+        }
         
         //send response
         
@@ -73,6 +107,7 @@ export const homeController = async(req, res) => {
             success: true,
             message: "News fetched successfully",
             final,
+            index,
         });
     }
     catch(error){

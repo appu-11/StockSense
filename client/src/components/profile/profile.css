@@ -1,0 +1,81 @@
+.tabs{
+    display: flex;
+    width: 70vw;
+    margin-left: 4%;
+    padding: 0.5%;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.152);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    justify-content: space-between;
+    flex-direction: column;
+    height: auto;
+}
+.tab-content > .active{
+    border-bottom: none;
+}
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+}
+.accordion-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+.whole{
+    display: flex;
+    justify-content: space-between;
+    min-height: 80vh;
+    height: auto;
+    margin-top: 1%;
+}
+.investments{
+    margin-top: 2%;
+}
+.second{
+    width: 20vw;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.152);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-right: 4%;
+    height: max-content;
+    min-height: 20vh;
+}
+.major{
+    margin: 4%;
+    display: flex;
+    flex-direction: column;
+}
+.gainer{
+    margin-bottom: 20%;
+}
+.loser{
+    margin-bottom: 20%;
+}
+.invest-card{
+    margin:2%;
+    display: flex;
+    justify-content: space-between;
+}
+.top-invest-tab{
+    display: flex;
+    justify-content: space-between;
+}
+.details-area{
+    width: 26%;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.152);
+    border-radius: 10px;
+    /* box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2); */
+    height: fit-content;
+    min-height: 40vh;
+}
+.details-outer{
+    margin: 2%;
+}
+.user-graph-card{
+    margin: 2%;
+}
+.user-graph-div{
+    min-height: 40%;
+}

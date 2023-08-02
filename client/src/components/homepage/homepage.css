@@ -3,10 +3,32 @@
     font-size: 30px;
     font-weight: bold;
     margin-left: 9%;
-    margin-top: 3%;
+    margin-top: 1%;
     text-decoration: underline;
 }
+
 .charts{
     justify-content: space-evenly;
     display: flex;
+}
+.Index{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.152);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    min-height: 50vh;
+}
+.index-area{
+    margin: 1%;
+}
+.index-graph{
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 2%;
 }
