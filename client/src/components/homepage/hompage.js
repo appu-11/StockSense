@@ -8,6 +8,7 @@ import { Newscard } from "../newscard/newscard.js"
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Indexgraph from "./IndexGraph.js";
+import { BouncingBalls } from "react-cssfx-loading";
 
 const Homepage = () => {
     
@@ -34,7 +35,14 @@ const Homepage = () => {
             }
         }
     }
-    if(!data || !index) return <span>Loading....</span>;
+    if(!data || !index) return (
+        <div className = "outer-balls">
+            <div className="balls">
+                <BouncingBalls/>
+                <span>Loading...</span>
+            </div>
+        </div>
+    );
 
     // NSEI, BSESN, NDX, SDX, DJI
     

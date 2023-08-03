@@ -39,3 +39,17 @@
     animation: fadeIn 0.3s ease-in-out;
 
 }
+.Modal-actions{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+.watch{
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

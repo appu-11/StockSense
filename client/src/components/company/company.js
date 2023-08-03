@@ -5,6 +5,7 @@ import axios from "axios";
 import Chart from "./Chart.js";
 import "./company.css"
 import { useAuth } from "../../context/auth.js";
+import { BouncingBalls } from "react-cssfx-loading";
 
 const CompanyName = () =>{
     const navigate = useNavigate();
@@ -60,7 +61,14 @@ const CompanyName = () =>{
         }
     }, [selectedDate, numberOfStocks]);
 
-    if(!data) return null;
+    if(!data) return (
+        <div className = "outer-balls">
+            <div className="balls">
+                <BouncingBalls/>
+                <span>Loading...</span>
+            </div>
+        </div>
+    );
     const handleAdd = () => {
         if(auth.user === null){
             alert("Please login to add stocks");
@@ -150,6 +158,9 @@ const CompanyName = () =>{
                                     <button className="btn btn-primary" onClick={() => {setShowModal(false)}}>Cancel</button>
                                     <button className="btn btn-primary" onClick={handleConfirm}>Confirm</button>
                                 </div>
+                            </div>
+                            <div className="mt-3">
+                                Or
                             </div>
                             <div className="watch">
                                 <button className="btn btn-primary" onClick={() => updateWatchlist(true)}>Add to Watchlist</button>

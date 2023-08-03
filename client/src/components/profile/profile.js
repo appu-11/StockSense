@@ -8,6 +8,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import {CloseButton} from 'react-bootstrap'
 import {UserCard} from './UserCard.js'
 import Graph from './Graph.js'
+import { BouncingBalls } from "react-cssfx-loading";
 import {Gainercard} from "./gainercard.js";
 
 const Profile = () =>{
@@ -59,8 +60,22 @@ const Profile = () =>{
         
     }, [selectedAccordion, prevSelectedAccordion]);
     
-    if(!data || !data2 || !data3 || !data4) return <div>Loading...</div>;
-    if(Object.keys(data7).length === 0) return null;
+    if(!data || !data2 || !data3 || !data4) return (
+        <div className = "outer-balls">
+            <div className="balls">
+                <BouncingBalls/>
+                <span>Loading...</span>
+            </div>
+        </div>
+    );
+    if(Object.keys(data7).length === 0) return (
+        <div className = "outer-balls">
+            <div className="balls">
+                <BouncingBalls/>
+                <span>Loading...</span>
+            </div>
+        </div>
+    );
     // console.log(data6);
     
     const InvestCard = ({ item, companysymbol, data3 }) => {

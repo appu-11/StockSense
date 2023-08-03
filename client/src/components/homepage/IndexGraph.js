@@ -14,6 +14,8 @@ const Indexgraph = (props) => {
     } = props;
     
     const chartContainerRef = useRef(null);
+    const tooltipRef = useRef(null);
+    const chartboxRef = useRef(null);
 
     useEffect(() => {
         if (chartContainerRef.current) {
@@ -79,6 +81,56 @@ const Indexgraph = (props) => {
             console.log(data, "data");
             console.log("Index graph data fine");
         }
+        const toolTipWidth = 80;
+        const toolTipHeight = 80;
+        const toolTipMargin = 15;
+        const toolTip = tooltipRef.current;
+        const container = chartboxRef.current;
+        toolTip.style = `width: fit-content; height: 100px; position: absolute; display: none; padding: 8px; box-sizing: border-box; font-size: 12px; text-align: left; z-index: 1000; top: 12px; left: 12px; pointer-events: none; border: 1px solid; border-radius: 2px;font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;`;
+        toolTip.style.background = 'white';
+        toolTip.style.color = 'black';
+        toolTip.style.borderColor = 'rgba( 38, 166, 154, 1)';
+        chart.subscribeCrosshairMove(param => {
+            if (
+                param.point === undefined ||
+                !param.time ||
+                param.point.x < 0 ||
+                param.point.x > container.clientWidth ||
+                param.point.y < 0 ||
+                param.point.y > container.clientHeight
+            ) {
+                toolTip.style.display = 'none';
+            } else {
+                // time will be in the same format that we supplied to setData.
+                // thus it will be YYYY-MM-DD
+                const dateStr = param.time;
+                toolTip.style.display = 'block';
+                const data = param.seriesData.get(series);
+                const price = data.value !== undefined ? data.value : data.close;
+                toolTip.innerHTML = `<div style="color: ${'rgba( 38, 166, 154, 1)'}">Value</div><div style="font-size: 24px; margin: 4px 0px; color: ${'black'}">
+                    &#8377; ${Math.round(100 * price) / 100}
+                    </div><div style="color: ${'black'}">
+                    ${dateStr}
+                    </div>`;
+                const containerRect = container.getBoundingClientRect();
+                const chartTop = containerRect.top;
+                const chartLeft = containerRect.left;
+                const y = param.point.y;
+                let left = param.point.x + toolTipMargin;
+                if (left > container.clientWidth - toolTipWidth - 30) {
+                    left = param.point.x - toolTipMargin - toolTipWidth;
+                }
+        
+                let top = y + toolTipMargin;
+                if (top > container.clientHeight - toolTipHeight - 30) {
+                    top = y - toolTipHeight - toolTipMargin;
+                }
+                left = chartLeft + left;
+                top = chartTop + top;
+                toolTip.style.left = left + 'px';
+                toolTip.style.top = top + 'px';
+            }
+        });
         window.addEventListener('resize', handleResize);
         return () => {
             if (chartContainerRef.current) {
@@ -92,9 +144,10 @@ const Indexgraph = (props) => {
     
 
 	return (
-        <div
-            ref={chartContainerRef}
-		/>
+        <div className="chartbox" ref = {chartboxRef}>
+            <div ref = {tooltipRef}/>
+            <div ref = {chartContainerRef}/>
+        </div>
 	);
 };
 export default Indexgraph;
